@@ -1,22 +1,22 @@
 {
-    "name": "duzun\/verup",
+    "name": "duzun/verup",
     "description": "Increment and update version in all project files",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "bin": [
-        ".\/verup.php"
+        "./verup.php"
     ],
     "license": "MIT",
     "authors": [
         {
             "name": "Dumitru Uzun",
             "email": "contact@duzun.me",
-            "homepage": "https:\/\/DUzun.Me\/"
+            "homepage": "https://DUzun.Me/"
         }
     ],
     "scripts": {
-        "verup": "php .\/verup.php -n duzun\/verup",
-        "version": "php .\/verup.php -n duzun\/verup 0",
+        "verup": "php ./verup.php -n duzun/verup",
+        "version": "php ./verup.php -n duzun/verup 0",
         "test": ""
     },
     "extra": {

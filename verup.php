@@ -16,14 +16,15 @@
  *
  *
  * @author Dumitru Uzun (DUzun.Me)
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 Verup::run() !== false or die(1);
 
+// Verup class definition
 class Verup {
-    const VERSION = '1.0.0';
-    const NAME = 'duzun/verup';
+    const VERSION = '1.1.0';
+    const NAME    = 'duzun/verup';
 
     public static $ver_reg = array(
         // var version = 'x.x.x'; $version = 'x.x.x'; version := 'x.x.x'; @version x.x.x;
@@ -74,10 +75,13 @@ class Verup {
             $ver_reg = array();
             foreach($_verup->regs as $i => $v) {
                 if ( strncmp($v, '/', 1) != 0 ) {
-                    $v = '/' . preg_quote($v) . '/i';
+                    $v = '/' . $v . '/i';
                 }
                 $ver_reg[$i] = $v;
             }
+        }
+        else {
+            $ver_reg = self::$ver_reg;
         }
 
         $over = $packo->version;
@@ -98,8 +102,7 @@ class Verup {
 
             echo('Bumping version: ' . $over . ' -> ' . $nver), PHP_EOL;
 
-            $buf = json_encode($packo, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
+            $buf = self::json_encode($packo);
             if ( $buf && $over != $nver ) {
                 $buf .= "\n";
                 file_put_contents(self::$packFile, $buf);
@@ -115,7 +118,7 @@ class Verup {
                     case '.json': {
                         $packo = json_decode($cnt);
                         $packo->version = $nver;
-                        $buf = json_encode($packo, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                        $buf = self::json_encode($packo);
                         if ( $buf ) {
                             $buf .= "\n";
                         }
@@ -125,14 +128,15 @@ class Verup {
                         $buf = NULL;
                         foreach(explode("\n", $cnt) as $l) {
                             for($i=count($ver_reg); $i--;) {
-                                if ( preg_match($ver_reg[$i], $l) ) {
-                                    $buf[] = preg_replace($ver_reg[$i], '$1nver', $l);
-                                    continue;
+                                if ( preg_match($e=$ver_reg[$i], $l) ) {
+                                    $l = preg_replace($e, '${1}'.$nver, $l, 1);
+                                    break;
                                 }
                             }
                             $buf[] = $l;
                         }
                         $buf = implode("\n", $buf);
+                        // $buf = NULL; // dev
                     }
                 }
                 if ( $buf && $buf != $cnt ) {
@@ -210,6 +214,11 @@ class Verup {
         $data = json_decode($data);
         return $data;
     }
+
+    public static function json_encode($data, $o=0) {
+        return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | $o);
+    }
+
 
 }
 
