@@ -1,4 +1,4 @@
-# verup.php
+# verup.php [![Latest Stable Version](https://poser.pugx.org/duzun/verup/v/stable)](https://packagist.org/packages/duzun/verup)
 
 Increment and update version in all project files according to semver.
 
