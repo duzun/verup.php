@@ -1,0 +1,25 @@
+# Project structure and usage
+
+- See README.md
+- This is a PHP CLI tool for incrementing & decrementing version numbers in project files according to semver
+- The main executable file is `verup.php`
+- The source code is in `src/Verup.php`
+- The tests are in `tests/`
+- Tests are written in pest
+- Tests generate temporary files in `tests/tmp/`
+
+# Development
+
+- Use the mainstream PHP version
+- No prod dependencies
+- Test command is `./vendor/bin/pest`
+
+# Conversation style
+
+- No excessive excuses.
+- Concise communication, using not too many words, but also not too little when needed.
+- Read the whole file when needed.
+- Take into account user edits, accepts and rejects of changes.
+- Read the selected code, if any.
+- When asked to change tests, don't touch the code.
+- When asked to change code, don't touch the tests.

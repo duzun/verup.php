@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use duzun\Verup;
+
+require __DIR__ . '/../src/Verup.php';
+
+/**
+ * Increment and update version in all project files.
+ *
+ * @author Dumitru Uzun (DUzun.Me)
+ * @version 1.2.0
+ */
+
+Verup::run() !== false or die(1);
